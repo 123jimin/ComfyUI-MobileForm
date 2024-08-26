@@ -11,7 +11,8 @@
     color: var(--fg-color);
     font-size: 1.0rem;
 
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
@@ -20,7 +21,7 @@
 }
 
 .comfy-mobile-form-hidden {
-    display: none;
+    display: none !important;
 }
 
 .comfy-mobile-form-row {
@@ -47,4 +48,11 @@
     textarea {
         min-height: 3em;
     }
+}
+
+.comfy-mobile-form-group {
+    display: flex;
+    flex-direction: column;
+
+    padding: .1em .25em .5em;
 }

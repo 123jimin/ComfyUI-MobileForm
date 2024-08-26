@@ -10,16 +10,13 @@
 export function createWidgetFromNode(elem, node) {
     elem.classList.add("comfy-mobile-form-widget");
     
-    const label_elem = document.createElement('label');
-    label_elem.textContent = node.title;
-    elem.appendChild(label_elem);
-
     switch(node.type) {
         case 'PrimitiveNode': {
             if(!Array.isArray(node.widgets)) return false;
 
             for(const widget of node.widgets) {
                 if(widget.name === 'value') {
+                    addTitle(elem, node.title);
                     addWidget(elem, widget);
                     return true;
                 }
@@ -27,10 +24,66 @@ export function createWidgetFromNode(elem, node) {
 
             break;
         }
+        case 'Note': {
+            if(!Array.isArray(node.widgets)) return false;
+
+            for(const widget of node.widgets) {
+                if(widget.type === 'customtext') {
+                    addTextNote(elem, widget);
+                    return true;
+                }
+            }
+            break;
+        }
+        default: {
+            if(!Array.isArray(node.widgets)) return false;
+            
+            addTitle(elem, node.title);
+
+            const group_elem = document.createElement('div');
+            group_elem.classList.add("comfy-mobile-form-group");
+            elem.appendChild(group_elem);
+
+            for(const widget of node.widgets) {
+                addTitle(group_elem, widget.name);
+                addWidget(group_elem, widget);
+            }
+
+            if(node.widgets.length >= 3) {
+                let opened = false;
+                group_elem.classList.add("comfy-mobile-form-hidden");
+    
+                const toggle_button = document.createElement('button');
+                toggle_button.textContent = "Open";
+                toggle_button.addEventListener('click', () => {
+                    opened = !opened;
+                    toggle_button.textContent = opened ? "Close" : "Open";
+    
+                    if(opened) {
+                        group_elem.classList.remove("comfy-mobile-form-hidden");
+                    } else {
+                        group_elem.classList.add("comfy-mobile-form-hidden");
+                    }
+                });
+    
+                elem.appendChild(toggle_button);
+            }
+
+            return true;
+        }
     }
 
-    console.warn("[MobileForm]", "Unknown node:", node);
     return false;
+}
+
+/**
+ * @param {HTMLDivElement} elem 
+ * @param {string} title 
+ */
+export function addTitle(elem, title) {
+    const label_elem = document.createElement('label');
+    label_elem.textContent = title;
+    elem.appendChild(label_elem);
 }
 
 /**
@@ -93,4 +146,14 @@ export function addCustomTextWidget(elem, widget) {
     textarea_elem.addEventListener('change', () => {
         widget.value = textarea_elem.value;
     });
+}
+
+/**
+ * @param {HTMLDivElement} elem 
+ * @param {{type: 'customtext', value: string}} widget 
+ */
+export function addTextNote(elem, widget) {
+    const text_elem = document.createElement('span');
+    text_elem.textContent = widget.value;
+    elem.appendChild(text_elem);
 }
