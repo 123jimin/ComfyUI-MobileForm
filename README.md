@@ -16,7 +16,7 @@ MobileForm can only be used with the new menu layout. Ensure that the "Use new m
 
 ## Installation
 
-At the `web/extensions` directory of your ComfyUI installation, simply run the following command.
+At the `custom_nodes` directory of your ComfyUI installation, clone this repository, which can be done via following git command.
 
 ```bash
 git clone https://github.com/123jimin/ComfyUI-MobileForm
