@@ -56,5 +56,7 @@ app.registerExtension({
             toolbar_end.insertBefore(toolbar_button, toolbar_end.firstChild);
         }
     },
-    async afterConfigureGraph(_, app) {},
+    async afterConfigureGraph(_, app) {
+        ui?.setGraph(app.graph);
+    },
 });

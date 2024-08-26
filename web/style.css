@@ -22,3 +22,29 @@
 .comfy-mobile-form-hidden {
     display: none;
 }
+
+.comfy-mobile-form-row {
+    display: flex;
+    flex-direction: row;
+    gap: .25em;
+}
+
+.comfy-mobile-form-widget {
+    flex: 1 1 0;
+
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: .75em;
+        color: var(--descrip-text);
+    }
+
+    input, textarea, select {
+        font-size: inherit;
+    }
+
+    textarea {
+        min-height: 3em;
+    }
+}
