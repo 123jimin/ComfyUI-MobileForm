@@ -76,10 +76,9 @@ export class MobileFormUI {
  */
 function isGroupContainingNode(group, node) {
     const [nx, ny] = node.pos;
-    const [nw, nh] = node.size ?? [0, 0];
     const [x, y, w, h] = group._bounding;
 
-    return x <= nx && nx+nw <= x+w && y <= ny && ny+nh <= y+h;
+    return x <= nx && nx <= x+w && y <= ny && ny <= y+h;
 }
 
 /**
