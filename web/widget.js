@@ -54,10 +54,10 @@ export function createWidgetFromNode(elem, node) {
                 group_elem.classList.add("comfy-mobile-form-hidden");
     
                 const toggle_button = document.createElement('button');
-                toggle_button.textContent = "Open";
+                toggle_button.textContent = "Expand";
                 toggle_button.addEventListener('click', () => {
                     opened = !opened;
-                    toggle_button.textContent = opened ? "Close" : "Open";
+                    toggle_button.textContent = opened ? "Close" : "Expand";
     
                     if(opened) {
                         group_elem.classList.remove("comfy-mobile-form-hidden");
@@ -111,6 +111,8 @@ export function addComboWidget(elem, widget) {
         option_elem.textContent = value;
         return option_elem;
     }));
+
+    selected_elem.value = widget.value;
 
     elem.appendChild(select_elem);
 
