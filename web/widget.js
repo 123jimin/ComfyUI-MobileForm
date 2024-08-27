@@ -112,7 +112,7 @@ export function addComboWidget(elem, widget) {
         return option_elem;
     }));
 
-    selected_elem.value = widget.value;
+    select_elem.value = widget.value;
 
     elem.appendChild(select_elem);
 
