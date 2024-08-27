@@ -25,14 +25,14 @@
 }
 
 .comfy-mobile-form-row {
-    display: flex;
-    flex-direction: row;
-    gap: .25em;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    column-gap: .25em;
 }
 
 .comfy-mobile-form-widget {
-    flex: 1 1 0;
-
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 
